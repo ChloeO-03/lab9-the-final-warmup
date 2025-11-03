@@ -10,16 +10,13 @@ export class StorageService {
    * Save data to localStorage
    * @param {string} key - The key to save under
    * @param {*} data - The data to save (will be JSON stringified)
-   * @returns {boolean} True if save was successful
    */
   save(key, data) {
     try {
       const fullKey = `${this.storageKey}_${key}`;
       localStorage.setItem(fullKey, JSON.stringify(data));
-      return;
     } catch (error) {
-      console.error('Failed to save to localStorage:', error);
-      return false;
+      console.error('Storage save failed:', error);
     }
   }
 
@@ -35,7 +32,7 @@ export class StorageService {
       const item = localStorage.getItem(fullKey);
       return item ? JSON.parse(item) : defaultValue;
     } catch (error) {
-      console.error('Failed to load from localStorage:', error);
+      console.error('Storage load failed:', error);
       return defaultValue;
     }
   }
@@ -43,24 +40,30 @@ export class StorageService {
   /**
    * Remove data from localStorage
    * @param {string} key - The key to remove
-   * @returns {boolean} True if removal was successful
    */
   remove(key) {
     try {
       const fullKey = `${this.storageKey}_${key}`;
       localStorage.removeItem(fullKey);
-      return true;
     } catch (error) {
-      console.error('Failed to remove from localStorage:', error);
-      return false;
+      console.error('Storage remove failed:', error);
     }
   }
 
   /**
    * Clear all data for this app
-   * @returns {boolean} True if clear was successful
    */
   clear() {
+    try {
+      Object.keys(localStorage)
+        .filter(key => key.startsWith(this.storageKey))
+        .forEach(key=> localStorage.removeItem(key));
+    } catch(error) {
+      console.error('Storage clear failed:', error);
+    }
+  }
+}
+    /** 
     try {
       const keysToRemove = [];
       for (let i = 0; i < localStorage.length; i++) {
@@ -70,10 +73,8 @@ export class StorageService {
         }
       }
       keysToRemove.forEach(key => localStorage.removeItem(key));
-      return true;
     } catch (error) {
-      console.error('Failed to clear localStorage:', error);
-      return false;
+      console.error('Storage clear failed:', error);
     }
   }
-}
+} */
