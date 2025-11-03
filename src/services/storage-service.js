@@ -8,18 +8,26 @@ export class StorageService {
 
   /**
    * Save data to localStorage
+   * @param {string} key - The key to save under
+   * @param {*} data - The data to save (will be JSON stringified)
+   * @returns {boolean} True if save was successful
    */
-  save(k, d) {
+  save(key, data) {
     try {
-      const fk = `${this.storageKey}_${k}`;
-      localStorage.setItem(fk, JSON.stringify(d));
+      const fullKey = `${this.storageKey}_${key}`;
+      localStorage.setItem(fullKey, JSON.stringify(data));
+      return;
     } catch (error) {
       console.error('Failed to save to localStorage:', error);
+      return false;
     }
   }
 
   /**
    * Load data from localStorage
+   * @param {string} key - The key to load
+   * @param {*} defaultValue - Value to return if key doesn't exist
+   * @returns {*} The loaded data or defaultValue
    */
   load(key, defaultValue = null) {
     try {
@@ -34,18 +42,23 @@ export class StorageService {
 
   /**
    * Remove data from localStorage
+   * @param {string} key - The key to remove
+   * @returns {boolean} True if removal was successful
    */
-  remove(k) {
+  remove(key) {
     try {
-      const fullK = `${this.storageKey}_${k}`;
-      localStorage.removeItem(fullK);
-    } catch (e) {
-      console.error('Failed to remove from localStorage:', e);
+      const fullKey = `${this.storageKey}_${key}`;
+      localStorage.removeItem(fullKey);
+      return true;
+    } catch (error) {
+      console.error('Failed to remove from localStorage:', error);
+      return false;
     }
   }
 
   /**
    * Clear all data for this app
+   * @returns {boolean} True if clear was successful
    */
   clear() {
     try {
@@ -57,8 +70,10 @@ export class StorageService {
         }
       }
       keysToRemove.forEach(key => localStorage.removeItem(key));
+      return true;
     } catch (error) {
       console.error('Failed to clear localStorage:', error);
+      return false;
     }
   }
 }
