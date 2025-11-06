@@ -15,7 +15,7 @@ This lab emphasizes **process over product**, demonstrating professional enginee
 
 ## Live Demo
 - [Deployed Application](lab9-thefinalwarmup.netlify.app)
-- [GitHub Repository](https://github.com/ChloeO-03/lab9-the-final-warmup.git)
+- [GitHub Repository](https://github.com/ChloeO-03/lab9-the-final-warmup)
 
 ## Technologies Used
 - **Lit** (Web Components Framework)
