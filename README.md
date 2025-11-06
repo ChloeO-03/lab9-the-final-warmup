@@ -14,7 +14,7 @@ The objective is to transform low-quality, generated code into a **production-re
 This lab emphasizes **process over product**, demonstrating professional engineering habits, ownership, and risk reduction when dealing with imperfect codebases.
 
 ## Live Demo
-- [Deployed Application](lab9-thefinalwarmup.netlify.app)
+- [Deployed Application](https://lab9-thefinalwarmup.netlify.app/)
 - [GitHub Repository](https://github.com/ChloeO-03/lab9-the-final-warmup)
 
 ## Technologies Used
