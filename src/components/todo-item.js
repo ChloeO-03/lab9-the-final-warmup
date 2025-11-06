@@ -42,11 +42,16 @@ export class TodoItem extends LitElement {
       font-size: 16px;
       color: #333;
       word-break: break-word;
+      transition: all 0.3s ease;
     }
 
+    /* Enhanced strikethrough styling */
     .todo-text.completed {
       text-decoration: line-through;
+      text-decoration-thickness: 2px;
+      text-decoration-color: #f44336;
       color: #999;
+      opacity: 0.7;
     }
 
     .edit-input {

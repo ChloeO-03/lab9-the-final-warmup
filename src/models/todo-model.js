@@ -7,7 +7,7 @@ export class TodoModel {
   constructor(storageService) {
     this.storage = storageService;
     this.todos = this.storage.load('todos', []);
-    this.listeners = [];
+    this.observers = []; // FIXED: was this.listeners
     this.nextId = this.storage.load('nextId', 1);
   }
 
@@ -40,9 +40,7 @@ export class TodoModel {
       text: text.trim(),
       completed: false,
       createdAt: new Date().toISOString()
-
     });
-  
 
     this.save();
     this.notify();
@@ -79,8 +77,8 @@ export class TodoModel {
   updateTodo(id, newText) {
     if (!newText || !newText.trim()) return;
 
-    const todo = this.todos.find(t=> t.id === id);
-    if(todo) {
+    const todo = this.todos.find(t => t.id === id);
+    if (todo) {
       todo.text = newText.trim();
       this.save();
       this.notify();
